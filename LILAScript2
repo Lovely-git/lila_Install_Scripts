@@ -1,0 +1,88 @@
+##### lila Script 2
+echo "Executing Lila Script 2"
+sbt --version
+
+echo "node - NVM Installation starts - NVM version applied is v15.11.0"
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
+source ~/.bashrc
+nvm list-remote
+nvm install v15.11.0
+nvm list
+echo "node - NVM Installation Ends"
+
+echo "NPM - Yarn installation starts"
+npm install -g yarn
+
+echo "NPM - Yarn installation Ends"
+
+echo "Python2 must exist as a prerequisite - hence installation starts"
+sudo apt install -y  python2
+echo "Python2 installation ends"
+
+echo "***very important G++ make and build essential packages - Prerequisite instalation **"
+
+sudo apt install -y  build-essential linux-headers-generic
+sudo apt install -y  libssl-dev
+
+echo "***very important G++ make and build essential packages - Prerequisite instalation ** ends..."
+
+echo "*** MongoDB installation starts"
+sudo apt-key list
+wget -qO - https://www.mongodb.org/static/pgp/server-4.4.asc | sudo apt-key add -
+echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/4.4 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.4.list
+sudo apt update
+sudo apt -y upgrade
+sudo apt install -y mongodb-org
+
+echo "*** MongoDB installation ends"
+
+ps --no-headers -o comm 1
+sudo systemctl status mongod
+sudo systemctl start mongod
+sudo systemctl enable mongod
+echo "After starting the daemon service of mongod and enabling for startup..."
+echo "   "
+sudo systemctl status mongod
+
+echo "Installing Redis ...."
+sudo apt install -y redis
+sudo systemctl start redis-server
+sudo systemctl enable redis-server
+sudo systemctl status redis-server
+echo "Installation of Redis Ends...."
+
+##### Magnanimous LILA Installation
+
+echo "Magnanimous LILA Installation Starts ..."
+mkdir ~/LiChess
+cd LiChess
+echo "Git Cloning Required LILA Project Files ...."
+git clone --recursive https://github.com/ornicar/lila.git
+git clone https://github.com/ornicar/lila-ws.git
+git clone --recursive https://github.com/niklasf/fishnet.git
+git clone https://github.com/ornicar/lila-fishnet.git
+echo "Git Cloning Required LILA Project Files eNds...."
+
+echo "if every pre-requisites have properly installed then following lila build will run successfully andrun Smooth, but will take few minutes to complete...."
+
+./ui/build
+
+echo "Magnanimous LILA Installation Ends ..."
+
+echo ".... Now compilation and running will have to be done manually.. so follow lila setup documents.."
+
+echo "To give u a hint u will get lila>.. where u have to type lila>compile and enter, then after compilation ends, u got to type lila>run and enter.."
+
+echo "Then open http://127.0.0.1:9663 in your browser. to test LILA"
+
+echo " Also Setup websockets : If you need websockets (which you probably do): in another tab in terminal ... Follow the 2 commands.."
+echo $USER":~$ cd lila-ws "
+echo $USER":~$ sbt run "
+
+echo " Now Compile and run lila first ;-))))))"
+./lila
+
+
+
+
+

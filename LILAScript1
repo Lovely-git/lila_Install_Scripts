@@ -1,0 +1,62 @@
+### git installation
+echo "git installation Starts.."
+sudo apt install -y git
+sudo apt update
+sudo apt upgrade -y
+
+### git Desktop Installation
+echo "Git Desktop Installation Starts .."
+
+sudo wget https://github.com/shiftkey/desktop/releases/download/release-2.6.3-linux1/GitHubDesktop-linux-2.6.3-linux1.deb
+
+sudo apt install -y  gdebi-core 
+sudo gdebi GitHubDesktop-linux-2.6.3-linux1.deb
+
+echo "Git Desktop Installation Ends .."
+
+## clean-up downloaded files
+rm GitHubDesktop-linux-2.6.3-linux1.deb
+
+echo "git installation Ends.. :)"
+
+#### Java Installation
+
+echo "Java installation Starts ....."
+
+sudo apt install -y  openjdk-11-jre-headless
+
+sudo apt update
+sudo apt upgrade -y
+echo "Java installation Ends ...."
+
+## CURL Installation
+echo "CURL installation Starts..."
+sudo apt install -y  curl 
+
+sudo apt update
+sudo apt upgrade -y
+
+echo "CURL installation Ends."
+
+#### SBT – SCALA INSTALLATION
+
+echo "SCALA -SBT Installation Starts .."
+
+echo "deb https://repo.scala-sbt.org/scalasbt/debian /" | sudo tee -a /etc/apt/sources.list.d/sbt.list
+
+curl -sL "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x2EE0EA64E40A89B84B2DF73499E82A75642AC823" | sudo apt-key add
+
+sudo apt update
+sudo apt upgrade -y
+
+sudo apt install -y  sbt
+
+echo "SCALA -SBT installation Ends..."
+### following will take a long time to execute.
+echo "following will take a long time to execute!! at the end it will create"
+echo "sbt:"$USER">"
+echo "@ the prompt type exit and execute Lila script 2 manually!!!"
+echo "like --> sbt:"$USER"> exit and ...Press Enter"
+sbt
+
+
